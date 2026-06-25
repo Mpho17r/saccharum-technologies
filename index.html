@@ -439,19 +439,19 @@
 
         <div class="proj-grid">
           <div class="proj-card">
-            <span class="status"><span class="dot"></span>In Progress</span>
+            <span class="status live"><span class="dot"></span>Live</span>
             <h3>Khezwo</h3>
             <p class="desc">[Add a one-line description here — what does Khezwo do, and what problem does it solve for users?]</p>
             <div class="stack"><span class="chip">[Add tech stack]</span></div>
-            <p class="edit-note">Placeholder — swap in the real description, status, and stack.</p>
+            <a href="https://khezwo-lite.onrender.com/" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:8px; padding:9px 16px; font-size:13.5px;">View Project ↗</a>
           </div>
 
           <div class="proj-card">
-            <span class="status"><span class="dot"></span>In Progress</span>
-            <h3>Popit Game</h3>
+            <span class="status live"><span class="dot"></span>Live</span>
+            <h3>Popit Game <span style="font-weight:500; font-size:13px; color:var(--ink-soft);">(Bounce Burst)</span></h3>
             <p class="desc">[Add a one-line description here — what's the game about, and what makes it fun?]</p>
             <div class="stack"><span class="chip">[Add tech stack]</span></div>
-            <p class="edit-note">Placeholder — swap in the real description, status, and stack.</p>
+            <a href="https://bounce-burst.preview.emergentagent.com/" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:8px; padding:9px 16px; font-size:13.5px;">View Project ↗</a>
           </div>
 
           <div class="proj-card placeholder">
@@ -490,15 +490,19 @@
         <div class="form-card">
           <div id="formDefault">
             <h3>Send us a message</h3>
-            <form id="contactForm">
+            <form id="contactForm" action="https://formsubmit.co/khezwotech@gmail.com" method="POST">
+              <input type="hidden" name="_subject" value="New inquiry from the Saccharum Technologies website">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="https://mpho17r.github.io/saccharum-technologies/?sent=true#/contact">
               <div class="form-row">
-                <div class="field"><label for="cf-name">Name</label><input id="cf-name" type="text" required placeholder="Your name"></div>
-                <div class="field"><label for="cf-email">Email</label><input id="cf-email" type="email" required placeholder="you@email.com"></div>
+                <div class="field"><label for="cf-name">Name</label><input id="cf-name" name="Name" type="text" required placeholder="Your name"></div>
+                <div class="field"><label for="cf-email">Email</label><input id="cf-email" name="Email" type="email" required placeholder="you@email.com"></div>
               </div>
               <div class="form-row">
-                <div class="field"><label for="cf-phone">Phone</label><input id="cf-phone" type="tel" placeholder="Optional"></div>
+                <div class="field"><label for="cf-phone">Phone</label><input id="cf-phone" name="Phone" type="tel" placeholder="Optional"></div>
                 <div class="field"><label for="cf-type">Project Type</label>
-                  <select id="cf-type">
+                  <select id="cf-type" name="Project Type">
                     <option>Website</option>
                     <option>Web App</option>
                     <option>Support</option>
@@ -506,7 +510,7 @@
                   </select>
                 </div>
               </div>
-              <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" rows="4" required placeholder="Tell us a bit about your project..."></textarea></div>
+              <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" name="Message" rows="4" required placeholder="Tell us a bit about your project..."></textarea></div>
               <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send Message</button>
             </form>
           </div>
@@ -557,16 +561,17 @@
     document.getElementById('navLinks').classList.remove('open');
   }
   window.addEventListener('hashchange', route);
-  window.addEventListener('DOMContentLoaded', route);
+  window.addEventListener('DOMContentLoaded', () => {
+    route();
+    if (new URLSearchParams(location.search).get('sent') === 'true') {
+      document.getElementById('formDefault').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      history.replaceState(null, '', location.pathname + location.hash);
+    }
+  });
 
   document.getElementById('navToggle').addEventListener('click', ()=>{
     document.getElementById('navLinks').classList.toggle('open');
-  });
-
-  document.getElementById('contactForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    document.getElementById('formDefault').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
   });
 </script>
 
